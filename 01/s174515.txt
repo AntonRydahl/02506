@@ -1,0 +1,4 @@
+image_convolution: 13
+boundary_length: 13705
+curve_smoothing: 0
+display_name: AntonRydahl
