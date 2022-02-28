@@ -1,0 +1,4 @@
+translation_length: 539.87778618
+magnification_scale: 2.7097312683116015
+rotation_angle: 157.10944700360616
+display_name: AntonRydahl
