@@ -1,0 +1,4 @@
+features_size: 99200
+cluster_probability: 0.9166666666666666
+dominant_segmentation: 2
+display_name: AntonRydahl
