@@ -25,27 +25,26 @@ def last_conv(in_channels, out_channels, kernel_size):
 # Creating the network
 class UNet(nn.Module):
 
-    def __init__(self):
+    def __init__(self,c):
         super().__init__()
                 
-        self.dconv_down1 = double_conv(1, 8,3)
-        self.dconv_down2 = double_conv(8, 16, 3)
-        self.dconv_down3 = double_conv(16, 32, 3)
-        #self.dconv_down4 = double_conv(32, 64, 3)        
+        self.dconv_down1 = double_conv(1, c,3)
+        self.dconv_down2 = double_conv(c, c*2, 3)
+        self.dconv_down3 = double_conv(c*2, c*2*2, 3)
+
 
         self.maxpool = nn.MaxPool2d(2)
-        self.upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)        
         
-        self.upconv2 = nn.ConvTranspose2d(32, 16, 2, stride=2)
-        self.dconv_up2 = double_conv(32, 16, 3)
-        self.upconv1 = nn.ConvTranspose2d(16, 8, 2, stride=2)
-        self.dconv_up1 = double_conv(16, 8, 3)
+        self.upconv2 = nn.ConvTranspose2d(c*2*2, c*2, 2, stride=2)
+        self.dconv_up2 = double_conv(c*2*2, c*2, 3)
+        self.upconv1 = nn.ConvTranspose2d(c*2, c, 2, stride=2)
+        self.dconv_up1 = double_conv(c*2, c, 3)
         #self.upconv2 = nn.ConvTranspose2d(32, 16, 2, stride=2)
         #self.dconv_up2 = double_conv(16, 8, 3)
         
         #self.dconv_up1 = double_conv(8 + 16, 16, 3)
         
-        self.conv_last = last_conv(8,2,1) 
+        self.conv_last = last_conv(c,2,1) 
         
         
     def forward(self, x):
